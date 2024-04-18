@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import PropTypes from "prop-types";
 
 const BlogForm = ({ createBlog }) => {
   const formRef = useRef();
@@ -37,6 +38,10 @@ const BlogForm = ({ createBlog }) => {
       </form>
     </div>
   );
+};
+BlogForm.displayName = "BlogForm";
+BlogForm.propTypes = {
+  createBlog: PropTypes.func.isRequired,
 };
 
 export default BlogForm;

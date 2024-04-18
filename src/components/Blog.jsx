@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import blogService from "../services/blogs";
+import PropTypes from "prop-types";
 
 const Blog = ({ blog, onChangeData }) => {
   const [view, setView] = useState(false);
@@ -13,7 +14,11 @@ const Blog = ({ blog, onChangeData }) => {
     onChangeData();
   };
   const handleDelete = async () => {
-    if (window.confirm(`Remove blog ${blog.title}. YOU're NOT  gonna need it! by ${blog.author}`)) {
+    if (
+      window.confirm(
+        `Remove blog ${blog.title}. YOU're NOT  gonna need it! by ${blog.author}`
+      )
+    ) {
       await blogService.deleteBlog(blog.id);
       onChangeData();
     }
@@ -44,6 +49,11 @@ const Blog = ({ blog, onChangeData }) => {
       </li>
     </div>
   );
+};
+
+Blog.propTypes = {
+  blog: PropTypes.object.isRequired,
+  onChangeData: PropTypes.func.isRequired,
 };
 
 export default Blog;
