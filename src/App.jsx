@@ -40,6 +40,7 @@ const App = () => {
   const handleLogout = () => {
     window.localStorage.removeItem("loggedBlogappUser");
     setUser(null);
+    blogService.setToken(null);
   };
 
   const handleLogin = async (event) => {
@@ -118,6 +119,13 @@ const App = () => {
     setBlogs(sortedBlogs);
   };
 
+  const handleLike = async (id) => {
+    const blog = blogs.find((blog) => blog.id === id);
+    const updatedBlog = { ...blog, likes: blog.likes + 1 };
+    await blogService.updateBlog(id, updatedBlog);
+    updateBlog();
+  };
+
   return (
     <div>
       <h1>Blogs</h1>
@@ -136,7 +144,11 @@ const App = () => {
       <button onClick={handleSort}>Sort by likes</button>
       <ul>
         {blogs.map((blog) => (
-          <Blog key={blog.id} blog={blog} onChangeData={updateBlog} />
+          <Blog
+            key={blog.id}
+            blog={blog}
+            onChangeData={() => handleLike(blog.id)}
+          />
         ))}
       </ul>
     </div>

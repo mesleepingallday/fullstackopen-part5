@@ -13,16 +13,21 @@ const getAll = () => {
 };
 
 const getBlog = async (id) => {
-  const response = await axios.get(`${baseUrl}/${id}`);
-  return response.data;
+  try {
+    const response = await axios.get(`${baseUrl}/${id}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const updateBlog = async (id, newObject) => {
-  const config = {
-    headers: { Authorization: token },
-  };
-  const response = await axios.put(`${baseUrl}/${id}`, newObject, config);
-  return response.data;
+  try {
+    const response = await axios.put(`${baseUrl}/${id}`, newObject);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const create = async (newObject) => {

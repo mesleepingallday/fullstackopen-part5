@@ -19,20 +19,20 @@ const BlogForm = ({ createBlog }) => {
     formRef.current.reset();
   };
   return (
-    <div>
+    <div className="formDiv">
       <h2>Create a new blog</h2>
       <form onSubmit={addBlog} ref={formRef}>
         <div>
           title:
-          <input name="title" />
+          <input name="title" placeholder="title" />
         </div>
         <div>
           author:
-          <input name="author" />
+          <input name="author" placeholder="author" />
         </div>
         <div>
           url:
-          <input name="url" />
+          <input name="url" placeholder="url" />
         </div>
         <button type="submit">save</button>
       </form>

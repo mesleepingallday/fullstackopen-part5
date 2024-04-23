@@ -7,12 +7,6 @@ const Blog = ({ blog, onChangeData }) => {
   const handleView = () => {
     setView(!view);
   };
-  const handleLike = async () => {
-    const blogToLike = await blogService.getBlog(blog.id);
-    const updatedBlog = { ...blogToLike, likes: blogToLike.likes + 1 };
-    await blogService.updateBlog(blog.id, updatedBlog);
-    onChangeData();
-  };
   const handleDelete = async () => {
     if (
       window.confirm(
@@ -33,16 +27,20 @@ const Blog = ({ blog, onChangeData }) => {
 
   return (
     <div>
-      <li style={blogStyle}>
-        {blog.title}{" "}
-        <button onClick={handleView}>{view ? "hide" : "view"}</button>
+      <li style={blogStyle} className="blog">
+        {blog.title} <p>{blog.author}</p>
+        <button onClick={handleView} className="viewButton">
+          {view ? "hide" : "view"}
+        </button>
         {view && (
-          <div>
+          <div className="details">
             <p>{blog.url}</p>
             <p>
-              likes {blog.likes} <button onClick={handleLike}>like</button>
+              likes {blog.likes}{" "}
+              <button onClick={onChangeData} className="likeButton">
+                like
+              </button>
             </p>
-            <p>{blog.author}</p>
             <button onClick={handleDelete}>remove</button>
           </div>
         )}
